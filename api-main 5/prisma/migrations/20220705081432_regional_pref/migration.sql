@@ -1,0 +1,58 @@
+ALTER TABLE "Profile" ADD COLUMN     "regional_pref" VARCHAR(7) NOT NULL DEFAULT 'en-US';
+-- CreateTable
+CREATE TABLE "RegionalPref" (
+    "id" SERIAL NOT NULL,
+    "short" TEXT NOT NULL,
+    "text" TEXT NOT NULL,
+
+    CONSTRAINT "RegionalPref_pkey" PRIMARY KEY ("id")
+);
+
+-- SEEDING RegionalPref
+insert into "RegionalPref" ("short", "text") values
+  ('ar', 'Arabic'),
+  ('ca', 'Catalan'),
+  ('zh-Hans', 'Chinese (Simplified)'),
+  ('zh-Hant', 'Chinese (Traditional)'),
+  ('zh-HK', 'Chinese (Hong Kong)'),
+  ('hr', 'Croatian'),
+  ('cs', 'Czech'),
+  ('da', 'Danish'),
+  ('nl', 'Dutch'),
+  ('en', 'English (U.S.)'),
+  ('en-GB', 'English (UK)'),
+  ('en-AU', 'English (Australian)'),
+  ('en-CA', 'English (Canadian)'),
+  ('en-IN', 'English (Indian)'),
+  ('en-IE', 'English (Ireland)'),
+  ('en-NZ', 'English (New Zealand)'),
+  ('en-SG', 'English (Singapore)'),
+  ('en-ZA', 'English (South Africa)'),
+  ('fi', 'Finnish'),
+  ('fr', 'French'),
+  ('fr-CA', 'French (Canadian)'),
+  ('de', 'German'),
+  ('el', 'Greek'),
+  ('he', 'Hebrew'),
+  ('hi', 'Hindi'),
+  ('hu', 'Hungarian'),
+  ('id', 'Indonesian'),
+  ('it', 'Italian'),
+  ('ja', 'Japanese'),
+  ('ko', 'Korean'),
+  ('ms', 'Malay'),
+  ('nb', 'Norwegian (Bokmal)'),
+  ('pl', 'Polish'),
+  ('pt', 'Portuguese'),
+  ('pt-BR', 'Portuguese (Brazil)'),
+  ('ro', 'Romanian'),
+  ('ru', 'Russian'),
+  ('sk', 'Slovak'),
+  ('es', 'Spanish'),
+  ('es-419', 'Spanish (Latin America)'),
+  ('es-MX', 'Spanish (Mexico)'),
+  ('sv', 'Swedish'),
+  ('th', 'Thai'),
+  ('tr', 'Turkish'),
+  ('uk', 'Ukrainian'),
+  ('vi', 'Vietnamese')

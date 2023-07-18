@@ -1,0 +1,19 @@
+{
+  "body": {
+    "firstName": "Areg",
+    "lastName": "",
+    "profile": {
+      "bowelMovementId": 2,
+      "urinationsPerDayId": 3,
+      "medicationIds": [2],
+      "medicalConditionIds": [3],
+      "exerciseIntensityId": 3,
+      "lifeStyleId": 2,
+      "genderId": 2,
+      "heightIn": 10,
+      "weightLbs": 5,
+      "regionalPref": "string",
+      "dob": "9/14/2004"
+    }
+  }
+}

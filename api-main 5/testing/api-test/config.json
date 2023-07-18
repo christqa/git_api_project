@@ -1,0 +1,24 @@
+{
+  "baseUrl": {
+    "development": "https://api.dev.projectspectra.dev",
+    "test": "http://localhost:3000",
+    "prod": "http://localhost:3000"
+  },
+  "auth0": {
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Accept": "*/*",
+      "Accept-Encoding": "*"
+    },
+    "body": {
+      "grant_type": "password",
+      "username": "process.env.AUTH0_EMAIL_ID",
+      "password": "process.env.AUTH0_PASSWORD",
+      "audience": "https://api.dev.projectspectra.dev",
+      "scope": "read:sample",
+      "client_id": "process.env.AUTH0_CLIENT_ID",
+      "client_secret": "process.env.AUTH0_CLIENT_SECRET"
+    },
+    "url": "https://auth.dev.projectspectra.dev/oauth/token"
+  }
+}

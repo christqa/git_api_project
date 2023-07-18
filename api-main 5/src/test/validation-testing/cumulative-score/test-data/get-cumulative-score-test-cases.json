@@ -1,0 +1,81 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "type": "hydration",
+        "startDate": -100,
+        "endDate": -99
+      }
+    }
+  },
+
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "type": "gutHealth",
+        "startDate": -1,
+        "endDate": 0
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid type - type",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"type\" must be one of [hydration, gutHealth, null]"
+    ],
+    "testCase": {
+      "query": {
+        "type": "gutHealthX",
+        "startDate": 0,
+        "endDate": 0
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid type - wrong data structure",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"type\" must be one of [hydration, gutHealth, null]"
+    ],
+    "testCase": {
+      "query": {
+        "type": [],
+        "startDate": 0,
+        "endDate": 0
+      }
+    }
+  },
+
+  {
+    "testName": "startDate is greater than 0",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"startDate\" must be less than or equal to 0"],
+    "testCase": {
+      "query": {
+        "type": "gutHealth",
+        "startDate": 1,
+        "endDate": 0
+      }
+    }
+  },
+
+  {
+    "testName": "End date is not greater than the start date",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"endDate\" must be greater than ref:startDate"],
+    "testCase": {
+      "query": {
+        "type": "hydration",
+        "startDate": 0,
+        "endDate": 0
+      }
+    }
+  }
+]

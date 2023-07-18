@@ -1,0 +1,17 @@
+{
+  "firstName": "Karen",
+  "lastName": "Kevork",
+  "profile": {
+    "dob": "9/15/1999",
+    "regionalPref": "string",
+    "weightLbs": 1500,
+    "heightIn": 12,
+    "genderId": 2,
+    "urinationsPerDayId": 3,
+    "bowelMovementId": 2,
+    "exerciseIntensityId": 3,
+    "lifeStyleId": 2,
+    "medicalConditionIds": [3],
+    "medicationIds": [2]
+  }
+}

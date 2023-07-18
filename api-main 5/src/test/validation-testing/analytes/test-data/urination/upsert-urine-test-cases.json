@@ -1,0 +1,123 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "params": {
+        "email": "test@tester.com"
+      },
+
+      "query": {
+        "deleteData": true
+      },
+
+      "body": [
+        {
+          "data": [
+            {
+              "startDate": "2022-06-10T08:00:00Z",
+              "endDate": "2022-06-10T08:00:00Z",
+              "color": 1,
+              "durationInSeconds": 200,
+              "concentration": 0.9
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "params": {
+        "email": "john@tester.com"
+      },
+
+      "query": {
+        "deleteData": false
+      },
+
+      "body": [
+        {
+          "data": [
+            {
+              "startDate": "2022-06-10T08:00:00Z",
+              "endDate": "2022-06-10T08:00:00Z",
+              "color": 10,
+              "durationInSeconds": 600,
+              "concentration": 1.05
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  {
+    "testName": "Invalid test case #1",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"email\" must be a valid email",
+      "\"deleteData\" must be a boolean",
+      "\"[0].startDate\" must be in YYYY-MM-DDTHH:mm:ssZ format"
+    ],
+    "testCase": {
+      "params": {
+        "email": "test@@tester.com"
+      },
+
+      "query": {
+        "deleteData": "truex"
+      },
+
+      "body": [
+        {
+          "data": [
+            {
+              "startDate": "2022-06-10",
+              "endDate": "2022-06-10T08:00:00Z",
+              "color": 1,
+              "durationInSeconds": 200,
+              "concentration": 0.9
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  {
+    "testName": "Invalid test case #1",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"email\" must be a valid email",
+      "\"deleteData\" must be a boolean",
+      "\"[0].data[0].color\" must be less than or equal to 10"
+    ],
+    "testCase": {
+      "params": {
+        "email": "tes.t@te.com.!ster.com"
+      },
+
+      "query": {
+        "deleteData": []
+      },
+
+      "body": [
+        {
+          "data": [
+            {
+              "startDate": "2022-06-10T08:00:00Z",
+              "endDate": "2022-06-10T08:00:00Z",
+              "color": 11,
+              "durationInSeconds": 200,
+              "concentration": 0.9
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

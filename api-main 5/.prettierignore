@@ -1,0 +1,17 @@
+node_modules
+coverage
+build
+.idea
+src/templates
+src/lib/pdf-reactor-client.ts
+*eslint-report.json
+coverage
+
+# TSOA related files
+src/routes.ts
+src/swagger.json
+src/error-en.json
+tsoa-config.js
+
+# sonarQube
+.scannerwork

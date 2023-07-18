@@ -1,0 +1,17 @@
+node_modules
+bin
+build
+data-generation
+src/templates
+coverage
+*eslint-report.json
+testing
+
+# TSOA related files
+src/routes.ts
+src/swagger.json
+tsoa-config.js
+src/lib
+
+# sonarQube
+.scannerwork

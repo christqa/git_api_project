@@ -1,0 +1,699 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = []
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DeviceInventory {
+  id                       Int                 @id @default(autoincrement())
+  deviceSerial             String              @unique @map("device_serial") @db.VarChar(256)
+  manufacturingDate        DateTime            @map("manufacturing_date") @db.Date
+  manufacturedForRegion    String              @default("") @map("manufactured_for_region") @db.VarChar(100)
+  deviceModel              DeviceModel         @relation(fields: [deviceModelId], references: [id], onDelete: Cascade)
+  deviceModelId            Int                 @default(1) @map("device_model_id")
+  bleMacAddress            String              @default("") @map("ble_mac_address") @db.VarChar(17)
+  wiFiMacAddress           String              @default("") @map("wifi_mac_address") @db.VarChar(17)
+  deviceMetadata           Json                @default("{}") @map("device_metadata")
+  calibrationFileLocations Json                @default("{}") @map("calibration_file_locations")
+  deviceStatus             DeviceStatus        @default(IN_SERVICE) @map("device_status")
+  deviceActivation         DeviceActivation[]
+  groupDevices             GroupDevices[]
+  urineData                UrineData[]
+  stoolData                StoolData[]
+  events                   Events[]
+  deviceFirmware           DeviceFirmware[]
+  UnprocessedEvents        UnprocessedEvents[]
+  DeviceSettings           DeviceSettings[]
+  BathroomActivity         BathroomActivity[]
+}
+
+enum DeviceStatus {
+  IN_SERVICE @map("IN_SERVICE")
+  VOID       @map("VOID")
+}
+
+model DeviceActivation {
+  id                    Int             @id @default(autoincrement())
+  deviceInventory       DeviceInventory @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId              Int             @map("device_id")
+  deviceFirmware        DeviceFirmware? @relation(fields: [deviceFirmwareId], references: [id], onDelete: Cascade)
+  deviceFirmwareId      Int?            @map("device_firmware_id")
+  timeZone              TimeZone        @relation(fields: [timeZoneId], references: [id], onDelete: Cascade)
+  timeZoneId            Int             @default(491) @map("time_zone_id")
+  deviceName            String          @map("device_name") @db.VarChar(200)
+  deviceModel           DeviceModel     @relation(fields: [deviceModelId], references: [id], onDelete: Cascade)
+  deviceModelId         Int             @default(1) @map("device_model_id")
+  deviceStatus          Json            @map("device_status")
+  batteryStatus         Int             @default(0) @map("battery_status")
+  wiFiSSID              String?         @map("wifi_ssid") @db.VarChar(250)
+  rssi                  Int?            @map("rssi")
+  deviceStatusUpdatedOn DateTime?       @map("device_status_updated_on") @db.Timestamptz(3)
+  activatedOn           DateTime        @default(now()) @map("activated_on") @db.Date
+  userActivated         Account         @relation("DeviceActivationActivatedBy", fields: [activatedBy], references: [id], onDelete: Cascade)
+  activatedBy           Int             @map("activated_by")
+  userDeactivated       Account?        @relation("DeviceActivationDeactivatedBy", fields: [deactivatedBy], references: [id], onDelete: Cascade)
+  deactivatedBy         Int?            @map("deactivated_by")
+  deleted               DateTime?       @db.Timestamptz(3)
+  isNotified            Boolean         @default(false) @map("is_notified")
+}
+
+model Firmware {
+  id               Int              @id @default(autoincrement())
+  virtualFirmware  String           @map("virtual_firmware") @db.VarChar(50)
+  isCurrent        Boolean          @default(false) @map("is_current")
+  addedOn          DateTime         @default(now()) @map("added_on") @db.Timestamptz(3)
+  releaseDate      DateTime         @default(now()) @map("release_date") @db.Date
+  deviceModel      DeviceModel      @relation(fields: [deviceModelId], references: [id], onDelete: Cascade)
+  deviceModelId    Int              @default(1) @map("device_model_id")
+  fileName         String           @default("") @map("filename") @db.VarChar(50)
+  locationMetaData Json             @default("{}") @map("location_metadata")
+  md5CheckSum      String           @default("2501e15fcc7464a8e7c67aa67d444093") @map("md5_checksum") @db.VarChar(32)
+  availabilityType AvailabilityType @default(INTERNAL_AVAILABILITY) @map("availability_type")
+  deviceFirmware   DeviceFirmware[]
+
+  @@unique([virtualFirmware, deviceModelId])
+}
+
+enum AvailabilityType {
+  GENERAL_AVAILABILITY         @map("GENERAL_AVAILABILITY")
+  GRADUAL_ROLLOUT_AVAILABILITY @map("GRADUAL_ROLLOUT_AVAILABILITY")
+  INTERNAL_AVAILABILITY        @map("INTERNAL_AVAILABILITY")
+}
+
+model DeviceFirmware {
+  id               Int                @id @default(autoincrement())
+  deviceInventory  DeviceInventory    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId         Int                @map("device_id")
+  firmware         Firmware           @relation(fields: [firmwareId], references: [id], onDelete: Cascade)
+  firmwareId       Int                @map("firmware_id")
+  addedOn          DateTime           @default(now()) @map("added_on") @db.Timestamptz(3)
+  isCurrent        Boolean            @default(false) @map("is_current")
+  isNotified       Boolean            @default(false) @map("is_notified")
+  status           Status             @default(AWAITINGUSERAPPROVAL)
+  failureLogs      String?            @default("") @map("failure_logs") @db.VarChar(5000)
+  updateOn         DateTime           @default(now()) @updatedAt @map("updated_on") @db.Timestamptz(3)
+  approvedOn       DateTime           @default(now()) @map("approved_on") @db.Timestamptz(3)
+  deviceActivation DeviceActivation[]
+
+  @@unique([deviceId, firmwareId])
+}
+
+enum Status {
+  AWAITINGUSERAPPROVAL @map("AWAITING_USER_APPROVAL")
+  PENDINGINSTALL       @map("PENDING_INSTALL")
+  INSTALLED
+  FAILED
+}
+
+model DeviceModel {
+  id               Int                @id @default(autoincrement())
+  model            String             @db.VarChar(100)
+  firmware         Firmware[]
+  deviceInventory  DeviceInventory[]
+  deviceActivation DeviceActivation[]
+}
+
+model GlobalSettings {
+  id           Int      @id @default(autoincrement())
+  settingName  String   @map("setting_name") @db.VarChar(250)
+  settingType  String   @map("setting_type") @db.VarChar(250)
+  settingValue String   @map("setting_value")
+  addedOn      DateTime @default(now()) @map("added_on") @db.Timestamptz(3)
+  updatedOn    DateTime @default(now()) @updatedAt @map("updated_on") @db.Timestamptz(3)
+}
+
+model DeviceSettings {
+  id                 Int             @id @default(autoincrement())
+  deviceInventory    DeviceInventory @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId           Int             @map("device_id")
+  deviceSettingName  String          @map("device_setting_name") @db.VarChar(250)
+  deviceSettingType  String          @map("device_setting_type") @db.VarChar(250)
+  deviceSettingValue String          @map("device_setting_value")
+  addedOn            DateTime        @default(now()) @map("added_on") @db.Timestamptz(3)
+  updatedOn          DateTime        @default(now()) @updatedAt @map("updated_on") @db.Timestamptz(3)
+  userRemoved        Account?        @relation("DeviceSettingsRemovedBy", fields: [removedBy], references: [id], onDelete: Cascade)
+  removedBy          Int?            @map("removed_by")
+  deleted            DateTime?       @db.Timestamptz(3)
+
+  // Temp-Solution: https://github.com/prisma/prisma/issues/6974#issuecomment-1451892413
+  // Unique index still exists at db level (with conditional constraint in order to support soft-delete), but prisma does not support yet "Conditional uniqueness constraints" ->
+  // @@unique([deviceId, deviceSettingName], name: "DeviceSettings_device_id_device_setting_name_key", where: { deleted: null })
+
+  //@@unique([deviceId, deviceSettingName])
+}
+
+model SignedAgreements {
+  id          Int        @id @default(autoincrement())
+  agreements  Agreements @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  agreementId Int        @default(1) @map("agreement_id")
+  user        Account    @relation(fields: [userId], references: [id])
+  userId      Int        @map("user_id")
+  agreedAt    DateTime   @default(now()) @map("agreed_at") @db.Timestamptz(3)
+
+  @@unique([userId, agreementId])
+}
+
+model Agreements {
+  id               Int                @id @default(autoincrement())
+  signedAgreements SignedAgreements[]
+  agreementType    AgreementTypes     @map("agreement_type")
+  version          Int                @db.SmallInt
+  url              String             @db.VarChar(128)
+  localeIso        String             @map("locale_iso") @db.VarChar(128) // according to https://en.wikipedia.org/wiki/ISO_639-1 standard
+
+  @@unique([agreementType, version, localeIso])
+}
+
+model GroupDevices {
+  id              Int             @id @default(autoincrement())
+  group           Groups          @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId         Int             @map("group_id")
+  deviceInventory DeviceInventory @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId        Int             @map("device_id")
+  userAdded       Account         @relation("GroupDevicesAddedBy", fields: [addedBy], references: [id], onDelete: Cascade)
+  addedBy         Int             @map("added_by")
+  addedOn         DateTime        @default(now()) @map("added_on") @db.Timestamptz(3)
+  userRemoved     Account?        @relation("GroupDevicesRemovedBy", fields: [removedBy], references: [id], onDelete: Cascade)
+  removedBy       Int?            @map("removed_by")
+  deleted         DateTime?       @db.Timestamptz(3)
+}
+
+enum GroupUserRoles {
+  admin
+  member
+}
+
+model GroupUsers {
+  id      Int            @id @default(autoincrement())
+  user    Account        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int            @map("user_id")
+  group   Groups         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId Int            @map("group_id")
+  addedOn DateTime       @default(now()) @map("added_on") @db.Timestamptz(3)
+  deleted DateTime?      @db.Timestamptz(3)
+  role    GroupUserRoles @map("group_user_role")
+}
+
+model Groups {
+  id           Int            @id @default(autoincrement())
+  groupName    String         @map("group_name") @db.VarChar(100)
+  userCreated  Account        @relation("GroupsCreatedBy", fields: [createdBy], references: [id], onDelete: Cascade)
+  createdBy    Int            @map("created_by")
+  createdOn    DateTime       @default(now()) @map("created_on") @db.Timestamptz(3)
+  userDeleted  Account?       @relation("GroupsDeletedBy", fields: [deletedBy], references: [id], onDelete: Cascade)
+  deletedBy    Int?           @map("deleted_by")
+  deleted      DateTime?      @db.Timestamptz(3)
+  groupUsers   GroupUsers[]
+  groupDevices GroupDevices[]
+  invitations  Invitations[]  @relation("InvitationsToGroup")
+}
+
+model Account {
+  id                        Int                          @id @default(autoincrement())
+  userGuid                  String                       @default(dbgenerated("uuid_generate_v4()")) @map("user_guid") @db.Uuid
+  authId                    String                       @unique @default("N/A") @map("auth_id") @db.VarChar(128)
+  email                     String                       @db.VarChar(256)
+  firstName                 String                       @map("first_name") @db.VarChar(64)
+  lastName                  String                       @map("last_name") @db.VarChar(64)
+  createdOn                 DateTime                     @default(now()) @map("created_on") @db.Timestamptz(3)
+  updatedOn                 DateTime                     @default(now()) @updatedAt @map("updated_on")
+  timeZone                  TimeZone                     @relation(fields: [timeZoneId], references: [id])
+  timeZoneId                Int                          @default(491) @map("time_zone_id")
+  transient                 Boolean                      @default(false)
+  isWelcomeEmailSent        Boolean                      @default(false) @map("is_welcome_email_sent")
+  profile                   Profile?
+  ShareUsage                ShareUsage?
+  deviceActivation          DeviceActivation[]           @relation("DeviceActivationActivatedBy")
+  deviceDeactivation        DeviceActivation[]           @relation("DeviceActivationDeactivatedBy")
+  groupsCreated             Groups[]                     @relation("GroupsCreatedBy")
+  groupsDeleted             Groups[]                     @relation("GroupsDeletedBy")
+  groupDevicesAdded         GroupDevices[]               @relation("GroupDevicesAddedBy")
+  groupDevicesRemoved       GroupDevices[]               @relation("GroupDevicesRemovedBy")
+  groupUsers                GroupUsers[]
+  signedAgreements          SignedAgreements[]
+  dataStore                 DataStore?
+  localCutoff               String                       @default("04:00 AM") @map("local_cutoff")
+  Message                   Message[]
+  UserMessageConfig         UserMessageConfig[]
+  NotificationSettings      NotificationSettings[]
+  sentInvitations           Invitations[]                @relation("InvitationsFromUser")
+  receivedInvitations       Invitations[]                @relation("InvitationsToUser")
+  dataSharingAgreementTo    DataSharingAgreement[]       @relation("DataSharingAgreementFromUser")
+  dataSharingAgreementFrom  DataSharingAgreement[]       @relation("DataSharingAgreementToUser")
+  UserMobile                UserMobile[]
+  DataPrivacyRemovalRequest DataPrivacyRemovalRequests[]
+  DeviceSettingsRemoved     DeviceSettings[]             @relation("DeviceSettingsRemovedBy")
+}
+
+model Events {
+  id              Int              @id @default(autoincrement())
+  deviceInventory DeviceInventory? @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId        Int?             @map("device_id")
+  eventData       Json             @map("event_data")
+  eventSource     EventSource      @map("event_source")
+  generatedOn     DateTime         @default(now()) @map("generated_on") @db.Timestamptz(3)
+}
+
+model Gender {
+  id      Int       @id @default(autoincrement())
+  text    String
+  Profile Profile[]
+}
+
+model LifeStyle {
+  id      Int       @id @default(autoincrement())
+  text    String
+  Profile Profile[]
+}
+
+model MedicalCondition {
+  id       Int       @id @default(autoincrement())
+  text     String
+  Profiles Profile[]
+}
+
+model Medication {
+  id       Int       @id @default(autoincrement())
+  text     String
+  Profiles Profile[]
+}
+
+model BowelMovement {
+  id       Int       @id @default(autoincrement())
+  text     String
+  Profiles Profile[]
+}
+
+model UrinationsPerDay {
+  id       Int       @id @default(autoincrement())
+  text     String
+  Profiles Profile[]
+}
+
+enum AgreementTypes {
+  privacyPolicy      @map("privacy_policy")
+  termsAndConditions @map("terms_and_conditions")
+}
+
+model ExerciseIntensity {
+  id       Int       @id @default(autoincrement())
+  text     String
+  Profiles Profile[]
+}
+
+model Profile {
+  id                      Int                       @id @default(autoincrement())
+  dob                     String                    @db.VarChar(32)
+  regionalPref            String                    @map("regional_pref") @db.VarChar(7)
+  weightLbs               Float?                    @map("weight_lbs")
+  heightIn                Int?                      @map("height_in") @db.SmallInt
+  createdOn               DateTime                  @default(now()) @map("created_on") @db.Timestamptz(3)
+  updatedOn               DateTime                  @default(now()) @updatedAt @map("updated_on")
+  user                    Account                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                  Int                       @unique @map("user_id")
+  gender                  Gender                    @relation(fields: [genderId], references: [id])
+  genderId                Int                       @map("gender_id")
+  lifeStyle               LifeStyle?                @relation(fields: [lifeStyleId], references: [id])
+  lifeStyleId             Int?                      @map("life_style_id")
+  exerciseIntensity       ExerciseIntensity?        @relation(fields: [exerciseIntensityId], references: [id])
+  exerciseIntensityId     Int?                      @map("exercise_intensity_id")
+  medicalConditions       MedicalCondition[]
+  medications             Medication[]
+  urinationsPerDay        UrinationsPerDay?         @relation(fields: [urinationsPerDayId], references: [id])
+  urinationsPerDayId      Int?                      @map("urinations_per_day_id")
+  bowelMovement           BowelMovement?            @relation(fields: [bowelMovementId], references: [id])
+  bowelMovementId         Int?                      @map("bowel_movement_id")
+  UrineData               UrineData[]
+  StoolData               StoolData[]
+  AnalytesManualEntry     AnalytesManualEntry[]
+  CumulativeScore         CumulativeScore[]
+  cumulativeBaselineValue CumulativeBaselineValue[]
+  UnprocessedEvents       UnprocessedEvents[]
+  userConfiguration       UserConfiguration?
+  BathroomActivity        BathroomActivity[]
+}
+
+model ShareUsage {
+  id     Int     @id @default(autoincrement())
+  user   Account @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int     @unique @map("user_id")
+  agreed Boolean
+}
+
+model CumulativeScore {
+  id             Int                  @id @default(autoincrement())
+  profile        Profile              @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId      Int                  @map("profile_id")
+  value          Int?
+  type           CumulativeScoreTypes @map("cumulative_score_type")
+  date           DateTime             @default(now()) @db.Timestamptz(3)
+  scoreOfRecord  Boolean              @default(true) @map("score_of_record")
+  timeOfDay      TimeOfDay?           @map("time_of_day")
+  trendIndicator TrendIndicators?     @map("trend_indicator")
+}
+
+model CumulativeBaselineValue {
+  id        Int                  @id @default(autoincrement())
+  profile   Profile              @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId Int                  @map("profile_id")
+  value     Int
+  type      CumulativeScoreTypes @map("cumulative_score_type")
+  timeOfDay TimeOfDay?           @map("time_of_day")
+  updatedAt DateTime             @db.Timestamptz(3)
+}
+
+model UserConfiguration {
+  id            Int     @id @default(autoincrement())
+  profile       Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId     Int     @unique @map("profile_id")
+  configuration Json
+}
+
+enum CumulativeScoreTypes {
+  hydration
+  gutHealth @map("gut_health")
+}
+
+enum EventSource {
+  DeviceGenerated @map("device_generated")
+  SystemGenerated @map("system_generated")
+  ManualEntry     @map("manual_entry")
+}
+
+model UrineData {
+  id                Int              @id @default(autoincrement())
+  profile           Profile          @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId         Int              @map("profile_id")
+  deviceInventory   DeviceInventory? @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId          Int?             @map("device_id")
+  firstInDay        Boolean          @default(false) @map("first_in_day")
+  color             Int
+  durationInSeconds Int              @map("duration_in_seconds")
+  concentration     Decimal          @db.Decimal(4, 3)
+  createdOn         DateTime         @default(now()) @map("created_on") @db.Timestamptz(3)
+  startDate         DateTime         @default(now()) @map("start_date") @db.Timestamptz(3)
+  endDate           DateTime         @default(now()) @map("end_date") @db.Timestamptz(3)
+  scoreDate         DateTime         @map("score_date") @db.Date
+  offsetTz          String           @default("+00:00") @map("offset_tz")
+}
+
+model StoolData {
+  id                Int              @id @default(autoincrement())
+  profile           Profile          @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId         Int              @map("profile_id")
+  deviceInventory   DeviceInventory? @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId          Int?             @map("device_id")
+  color             Int
+  hasBlood          Boolean          @map("has_blood")
+  durationInSeconds Int              @map("duration_in_seconds")
+  consistency       Int
+  createdOn         DateTime         @default(now()) @map("created_on") @db.Timestamptz(3)
+  startDate         DateTime         @default(now()) @map("start_date") @db.Timestamptz(3)
+  endDate           DateTime         @default(now()) @map("end_date") @db.Timestamptz(3)
+  scoreDate         DateTime         @map("score_date") @db.Date
+  offsetTz          String           @default("+00:00") @map("offset_tz")
+}
+
+model DataStore {
+  id     Int     @id @default(autoincrement())
+  user   Account @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int     @unique @map("user_id")
+  data   Json
+}
+
+model AnalytesManualEntry {
+  id        Int      @id @default(autoincrement())
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId Int      @map("profile_id")
+  isUrine   Boolean  @map("is_urine")
+  isStool   Boolean  @map("is_stool")
+  date      DateTime @default(now()) @db.Timestamptz(3)
+  start     DateTime @default(now()) @db.Timestamptz(3)
+  end       DateTime @default(now()) @db.Timestamptz(3)
+}
+
+model ReferenceDataVersion {
+  id      Int @id @default(autoincrement())
+  version Int
+}
+
+model TimeZone {
+  id               Int                @id @default(autoincrement())
+  text             String
+  gmt              String
+  deviceActivation DeviceActivation[]
+  accounts         Account[]
+}
+
+model RegionalPref {
+  id    Int    @id @default(autoincrement())
+  short String
+  text  String
+}
+
+model PushToken {
+  id          Int      @id @default(autoincrement())
+  deviceToken String   @map("device_token") @db.VarChar(256)
+  endpointId  String   @map("endpoint_id") @db.VarChar(256)
+  timestamp   DateTime @default(now()) @db.Timestamptz(3)
+
+  UserMobile UserMobile[]
+
+  @@unique([deviceToken])
+}
+
+model UserMobile {
+  id          Int       @id @default(autoincrement())
+  active      Boolean   @default(true)
+  updatedAt   DateTime  @updatedAt @db.Timestamptz(3)
+  createdAt   DateTime  @default(now()) @db.Timestamptz(3)
+  Account     Account   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int       @map("user_id")
+  pushToken   PushToken @relation(fields: [pushTokenId], references: [id], onDelete: Cascade)
+  pushTokenId Int       @map("push_token_id")
+
+  @@unique([userId, pushTokenId])
+}
+
+model Message {
+  id            Int         @id @default(autoincrement())
+  user          Account     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int         @map("user_id")
+  messageGuid   String      @default(dbgenerated("uuid_generate_v4()")) @map("message_guid") @db.Uuid
+  title         String
+  timestamp     DateTime    @default(now()) @db.Timestamptz(3)
+  message       String
+  messageType   MessageType @relation(fields: [messageTypeId], references: [id])
+  messageTypeId Int         @map("message_type_id")
+  metaData      Json?       @map("meta_data")
+  read          Boolean
+  deleted       DateTime?   @db.Timestamptz(3)
+}
+
+model UserMessageConfig {
+  id            Int         @id @default(autoincrement())
+  user          Account     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int         @map("user_id")
+  messageType   MessageType @relation(fields: [messageTypeId], references: [id])
+  messageTypeId Int         @map("message_type_id")
+  notify        Boolean
+}
+
+model MessageType {
+  id                        Int                       @id @default(autoincrement())
+  text                      String
+  NotificationSettingsTypes NotificationSettingsTypes @map("notification_settings_type")
+  Message                   Message[]
+  UserMessageConfig         UserMessageConfig[]
+}
+
+model NotificationSettings {
+  id     Int                         @id @default(autoincrement())
+  user   Account                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int                         @map("user_id")
+  push   Boolean                     @default(false)
+  sms    Boolean                     @default(false)
+  email  Boolean                     @default(false)
+  option NotificationSettingsOptions @map("notification_settings_option")
+  type   NotificationSettingsTypes   @map("notification_settings_type")
+
+  @@unique([userId, type])
+}
+
+enum NotificationSettingsTypes {
+  deviceIssues   @map("device_issues")
+  healthAlerts   @map("health_alerts")
+  notifications  @map("notifications")
+  feedbackSurvey @map("feedback_survey")
+}
+
+enum NotificationSettingsOptions {
+  immediately
+  daily
+  weekly
+}
+
+model Invitations {
+  id                   Int                   @id @default(autoincrement())
+  invitationId         String                @default(dbgenerated("uuid_generate_v4()")) @map("invitation_id") @db.Uuid
+  fromUser             Account               @relation("InvitationsFromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
+  fromUserId           Int                   @map("from_user_id")
+  toGroup              Groups?               @relation("InvitationsToGroup", fields: [toGroupId], references: [id], onDelete: Cascade)
+  toGroupId            Int?                  @map("to_group_id")
+  toUser               Account?              @relation("InvitationsToUser", fields: [toUserId], references: [id], onDelete: Cascade)
+  toUserId             Int?                  @map("to_user_id")
+  toUserEmail          String?               @map("to_user_email") @db.VarChar(256)
+  permissions          PermissionTypes[]
+  groupAccessLevel     GroupUserRoles?       @map("group_access_level")
+  sentAt               DateTime              @default(now()) @map("sent_at") @db.Timestamptz(3)
+  expiresAt            DateTime              @map("expires_at") @db.Timestamptz(3)
+  acceptedAt           DateTime?             @map("accepted_at") @db.Timestamptz(3)
+  rejectedAt           DateTime?             @map("rejected_at") @db.Timestamptz(3)
+  deleted              DateTime?             @db.Timestamptz(3)
+  dataSharingAgreement DataSharingAgreement?
+  inviteType           InvitationType        @default(datasharing) @map("invite_type")
+}
+
+model DataSharingAgreement {
+  id           Int               @id @default(autoincrement())
+  agreementId  String            @default(dbgenerated("uuid_generate_v4()")) @map("agreement_id") @db.Uuid
+  invitation   Invitations       @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  invitationId Int               @unique @map("invitation_id")
+  fromUser     Account           @relation("DataSharingAgreementFromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
+  fromUserId   Int               @map("from_user_id")
+  toUser       Account           @relation("DataSharingAgreementToUser", fields: [toUserId], references: [id], onDelete: Cascade)
+  toUserId     Int               @map("to_user_id")
+  permissions  PermissionTypes[]
+  agreedAt     DateTime          @default(now()) @map("agreed_at") @db.Timestamptz(3)
+  revokedAt    DateTime?         @map("revoked_at") @db.Timestamptz(3)
+}
+
+enum InvitationType {
+  datasharing @map("data_sharing")
+  joingroup   @map("join_group")
+}
+
+enum PermissionTypes {
+  read
+  write
+  delete
+}
+
+model UrineFutureData {
+  id                Int      @id @default(autoincrement())
+  color             Int
+  durationInSeconds Int      @map("duration_in_seconds")
+  concentration     Decimal  @db.Decimal(4, 3)
+  startDate         DateTime @default(now()) @map("start_date") @db.Timestamptz(3)
+  endDate           DateTime @default(now()) @map("end_date") @db.Timestamptz(3)
+  email             String   @db.VarChar(256)
+  used              Boolean  @default(false)
+}
+
+model StoolFutureData {
+  id                Int      @id @default(autoincrement())
+  color             Int
+  hasBlood          Boolean  @map("has_blood")
+  durationInSeconds Int      @map("duration_in_seconds")
+  consistency       Int
+  startDate         DateTime @default(now()) @map("start_date") @db.Timestamptz(3)
+  endDate           DateTime @default(now()) @map("end_date") @db.Timestamptz(3)
+  email             String   @db.VarChar(256)
+  used              Boolean  @default(false)
+}
+
+model UnprocessedEvents {
+  id                   Int             @id @default(autoincrement())
+  deviceId             Int             @map("device_id")
+  profileId            Int             @map("profile_id")
+  eventBody            Json?           @map("event_body")
+  startedOn            DateTime?       @map("started_on") @db.Timestamptz(3)
+  endedOn              DateTime?       @map("ended_on") @db.Timestamptz(3)
+  isEventProcessed     Boolean         @default(false)
+  eventUuid            String          @unique @db.Uuid
+  fileLocationMetadata Json?           @map("file_location_metadata")
+  metadata             Json?
+  profile              Profile         @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  deviceInventory      DeviceInventory @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  EventFiles           EventFiles[]
+}
+
+model EventFiles {
+  id                  Int               @id @default(autoincrement())
+  unprocessedEventsId Int               @map("unprocessed_event_id")
+  unprocessedEvents   UnprocessedEvents @relation(fields: [unprocessedEventsId], references: [id], onDelete: Cascade)
+  fileMetadata        Json              @map("file_metadata")
+  filename            String            @default("")
+  createdOn           DateTime          @default(now()) @map("created_on") @db.Timestamptz(3)
+  processedOn         DateTime?         @default(now()) @map("processed_on") @db.Timestamptz(3)
+  isFileProcessed     Boolean           @default(false)
+}
+
+model BathroomActivityFiles {
+  id                 Int              @id @default(autoincrement())
+  bathroomActivityId Int              @map("bathroom_activity_id")
+  bathroomActivity   BathroomActivity @relation(fields: [bathroomActivityId], references: [id], onDelete: Cascade)
+  fileMetadata       Json             @map("file_metadata")
+  filename           String           @default("")
+  createdOn          DateTime         @default(now()) @map("created_on") @db.Timestamptz(3)
+  processedOn        DateTime?        @default(now()) @map("processed_on") @db.Timestamptz(3)
+  isFileProcessed    Boolean          @default(false)
+}
+
+model BathroomActivity {
+  id                    Int                     @id @default(autoincrement())
+  deviceId              Int                     @map("device_id")
+  profileId             Int                     @map("profile_id")
+  eventBody             Json?                   @map("event_body")
+  startedOn             DateTime?               @map("started_on") @db.Timestamptz(3)
+  endedOn               DateTime?               @map("ended_on") @db.Timestamptz(3)
+  isEventProcessed      Boolean                 @default(false)
+  eventUuid             String                  @unique @db.Uuid
+  fileLocationMetadata  Json?                   @map("file_location_metadata")
+  metadata              Json?
+  profile               Profile                 @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  deviceInventory       DeviceInventory         @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  BathroomActivityFiles BathroomActivityFiles[]
+}
+
+model DataPrivacyRemovalRequestTypes {
+  id                        Int                                @id @default(autoincrement())
+  text                      String
+  order                     Int?
+  DataPrivacyRequestReasons DataPrivacyRemovalRequestReasons[]
+}
+
+model DataPrivacyRemovalRequestReasons {
+  id                            Int                            @id @default(autoincrement())
+  dataPrivacyRemovalRequestType DataPrivacyRemovalRequestTypes @relation(fields: [requestType], references: [id], onDelete: Cascade)
+  requestType                   Int                            @map("request_type")
+  text                          String
+  allowAdditionalText           Boolean                        @default(false) @map("allow_additional_text")
+  DataPrivacyRemovalRequest     DataPrivacyRemovalRequests[]
+}
+
+model DataPrivacyRemovalRequests {
+  id                              Int                              @id @default(autoincrement())
+  account                         Account                          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                          Int                              @map("user_id")
+  dataPrivacyRemovalRequestReason DataPrivacyRemovalRequestReasons @relation(fields: [requestReason], references: [id], onDelete: Cascade)
+  requestReason                   Int                              @map("request_reason")
+  requestReasonText               String?                          @map("request_reason_text")
+  requestedAt                     DateTime                         @default(now()) @map("requested_at") @db.Timestamptz(3)
+}
+
+enum TimeOfDay {
+  morning
+  afternoon
+  night
+}
+
+enum TrendIndicators {
+  up
+  down
+  same
+}

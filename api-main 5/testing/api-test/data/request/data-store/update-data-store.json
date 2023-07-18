@@ -1,0 +1,10 @@
+{
+  "body": {
+    "isBathroomUsageCompleted": false,
+    "isLifestyleCompleted": false,
+    "isMedicalConditionsCompleted": true,
+    "isMedicationsCompleted": false,
+    "batteryLevel": "high",
+    "batteryPercentage": 100
+  }
+}

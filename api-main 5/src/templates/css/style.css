@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+.header {
+  text-align: left;
+}
+
+.heading-font {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  font-family: 'Fredoka', sans-serif;
+}
+
+.gray {
+  color: #a3a2a2;
+}
+
+.smallfont {
+  font-size: 12px;
+  color: #a3a2a2;
+}
+
+.footer {
+  text-align: left;
+}
+
+.table-width {
+  width: 1000px;
+}
+
+.td-width {
+  width: 500px;
+}
+
+.th-width {
+  float: left;
+  font-size: 20px;
+}
+
+body {
+  width: 500px;
+}
+
+small {
+  font-size: 10px;
+  float: left;
+  color: #a3a2a2;
+}
+
+hr.new1 {
+  border-top: 1px solid #a3a2a2;
+  width: 1000px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.progress {
+  width: 100%;
+  height: 12px;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  float: left;
+}
+
+.progress-bar.red {
+  background-color: #f5adad;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.progress-bar.green {
+  background-color: #47d89a;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.progress-bar.yellow {
+  background-color: #f9deae;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.progress-bar-small {
+  float: left;
+  height: 14px;
+  border-radius: 50px;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  padding-top: 6px;
+  background: #47d89a;
+  text-align: center;
+  color: white;
+  display: inline-block;
+}
+
+.circle2 {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding-top: 6px;
+  margin-right: 21px;
+  background: #f3be5d;
+  text-align: center;
+  color: white;
+  border: 3px solid rgb(255, 255, 255);
+  margin-bottom: -11px;
+  position: relative;
+}
+
+.circle4 {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  padding-top: 12px;
+  padding-right: 2px;
+  background: #47d89a;
+  text-align: center;
+  color: white;
+  display: inline-block;
+}
+
+.img {
+  height: 42px;
+  width: 40px;
+  margin-left: 15px;
+}
+
+.icon-img {
+  height: 67px;
+  width: 65px;
+  margin-bottom: -25px;
+  margin-right: -11px;
+}
+
+.dot {
+  border-radius: 50%;
+  height: 4px;
+  padding: 4px;
+  background: #47d89a;
+  text-align: center;
+  color: white;
+  display: inline-block;
+  margin-left: 14px;
+}
+
+.barchart-Wrapper {
+  display: table;
+  position: relative;
+  margin: 20px 0;
+  height: 125px;
+}
+
+.barChart-Container {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+}
+
+.barchart {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+  border-bottom: 3px solid #737373;
+}
+
+.barchart-Col {
+  position: relative;
+  vertical-align: bottom;
+  display: table-cell;
+  height: 100%;
+}
+
+.barchart-Col + .barchart-Col {
+  border-left: 4px solid transparent;
+}
+
+.barchart-Bar {
+  position: relative;
+  height: 5px;
+  transition: height 0.5s 2s;
+  width: 9px;
+  margin: 7px;
+  border-radius: 5px;
+  margin-bottom: -10px;
+}
+
+.barchart-Bar:after {
+  content: attr(attr-height);
+  color: white;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.barchart-BarFooter {
+  position: absolute;
+  text-align: center;
+  height: 10%;
+  width: 100%;
+}
+
+.barchart-BarFooter h5 {
+  color: 3px solid #f61010;
+  padding-top: 2px;
+}
+
+.barchart-TimeCol {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.barchart-Time {
+  height: 14%;
+  vertical-align: middle;
+  position: relative;
+  text-align: end;
+}
+
+.barchart-Time:after {
+  border-bottom: 1px solid #a3a2a2;
+  content: '';
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0em;
+  text-align: right;
+}
+
+.barchart-TimeText {
+  position: absolute;
+  top: -8px;
+  z-index: 1;
+  background: white;
+  padding-left: 5px;
+  color: #4d4d4d;
+  font-size: 15px;
+  font-family: 'Avenir Medium';
+}
+
+.yellow-bar {
+  background-color: #f3be5d;
+}
+
+.green-bar {
+  background-color: #5fdfaa;
+}
+
+.red-bar {
+  background-color: #fd615f;
+}
+
+.gray-bar {
+  background-color: #a3a2a2;
+}
+
+.line {
+  height: 200px;
+  background: repeating-linear-gradient(
+      to left,
+      black 0,
+      black 5px,
+      transparent 5px,
+      transparent 7px
+    )
+    top;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+}
+
+.bottom-text {
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 8px;
+  text-align: center;
+}
+
+td,
+th {
+  text-align: left;
+  border-radius: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-border {
+  border: 1px solid #e5e5e5;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.vl {
+  border-left: 4px dotted #47d89a;
+  height: 20px;
+  position: relative;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+
+.vl2 {
+  border-left: dotted 0.2rem #47d89a;
+  height: 27px;
+  position: relative;
+  left: 50%;
+  margin-left: -1px;
+  top: 0px;
+  letter-spacing: 1px;
+}
+
+.progressbar-left {
+  text-align: left;
+  color: #a3a2a2;
+}
+
+.progressbar-right {
+  text-align: end;
+  color: #a3a2a2;
+}
+
+.progressbar-leftvalue {
+  position: absolute;
+  margin-top: -18px;
+}
+
+tr.change:nth-child(even) {
+  background: white;
+}
+
+tr.change:nth-child(odd) {
+  background: #fafafa;
+}

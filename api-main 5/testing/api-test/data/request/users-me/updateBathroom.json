@@ -1,0 +1,19 @@
+{
+  "body": {
+    "firstName": "Karen",
+    "lastName": "Kevork",
+    "profile": {
+      "bowelMovementId": 1,
+      "urinationsPerDayId": 4,
+      "medicationIds": [2],
+      "medicalConditionIds": [3],
+      "exerciseIntensityId": 3,
+      "lifeStyleId": 2,
+      "genderId": 2,
+      "heightIn": 12,
+      "weightLbs": 1500,
+      "regionalPref": "string",
+      "dob": 0
+    }
+  }
+}

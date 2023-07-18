@@ -1,0 +1,24 @@
+{
+  "path": "/haigaz@projectspectra.dev/",
+  "parameters": { "deleteData": false },
+  "body": [
+    {
+      "data": [
+        {
+          "startDate": "2022-10-14T08:38:11Z",
+          "endDate": "2022-10-14T08:38:11Z",
+          "color": 3,
+          "concentration": 1,
+          "durationInSeconds": 300
+        },
+        {
+          "startDate": "2022-10-14T08:38:11Z",
+          "endDate": "2022-10-14T08:38:11Z",
+          "color": 3,
+          "concentration": 1,
+          "durationInSeconds": 300
+        }
+      ]
+    }
+  ]
+}

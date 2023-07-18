@@ -1,0 +1,74 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "userEmail": "admin@gmail.com",
+        "baselineValue": 20,
+        "type": "hydration",
+        "date": -1,
+        "value": 0
+      }
+    }
+  },
+
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "userEmail": "john@hotmail.com",
+        "baselineValue": 99,
+        "type": "hydration",
+        "date": 0,
+        "value": 99
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid Email",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"userEmail\" must be a valid email"],
+    "testCase": {
+      "body": {
+        "userEmail": "john#.%@hotmail..com",
+        "baselineValue": 99,
+        "type": "hydration",
+        "date": 0,
+        "value": 99
+      }
+    }
+  },
+
+  {
+    "testName": "Value is greater than threshold",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"baselineValue\" must be less than or equal to 100"],
+    "testCase": {
+      "body": {
+        "userEmail": "john@hotmail.com",
+        "baselineValue": 101,
+        "type": "hydration",
+        "date": 0,
+        "value": 99
+      }
+    }
+  },
+
+  {
+    "testName": "Value is greater than threshold",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"value\" must be less than or equal to 100"],
+    "testCase": {
+      "body": {
+        "userEmail": "john#@hotmail.com",
+        "baselineValue": 99,
+        "type": "hydration",
+        "date": 0,
+        "value": 101
+      }
+    }
+  }
+]

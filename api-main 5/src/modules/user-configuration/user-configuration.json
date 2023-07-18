@@ -1,0 +1,105 @@
+{
+  "hydration": {
+    "baseline": 75,
+    "morningBaseline": 75,
+    "afternoonBaseline": 75,
+    "nightBaseline": 75,
+    "trendIndicator": "up",
+    "optimumRangeLow": 70,
+    "needsImprovementUpperBound": 69,
+    "warningUpperBound": 40,
+    "analytes": {
+      "color": {
+        "contributionPercentage": 100,
+        "baseline": 5,
+        "warningLowerBound": 1.9,
+        "normalLowerBound": 2,
+        "normalUpperBound": 4,
+        "warningUpperBound": 7.5,
+        "minimumLowerBound": 0,
+        "maximumUpperBound": 10
+      },
+      "frequency": {
+        "contributionPercentage": 0,
+        "baseline": 10,
+        "warningLowerBound": 0.01,
+        "normalLowerBound": 1,
+        "maximumUpperBound": 0,
+        "normalUpperBound": 15,
+        "warningUpperBound": 24,
+        "minimumLowerBound": 0
+      },
+      "durationInSeconds": {
+        "contributionPercentage": 0,
+        "baseline": 100,
+        "warningLowerBound": 0.01,
+        "normalLowerBound": 1,
+        "maximumUpperBound": 0,
+        "normalUpperBound": 200,
+        "warningUpperBound": 200,
+        "minimumLowerBound": 0
+      },
+      "concentration": {
+        "contributionPercentage": 0,
+        "baseline": 1.005,
+        "warningLowerBound": 1.001,
+        "normalLowerBound": 1.002,
+        "normalUpperBound": 1.01,
+        "maximumUpperBound": 0,
+        "warningUpperBound": 1.03,
+        "minimumLowerBound": 1
+      }
+    }
+  },
+  "gutHealth": {
+    "baseline": 75,
+    "trendIndicator": "up",
+    "optimumRangeLow": 70,
+    "needsImprovementUpperBound": 69,
+    "warningUpperBound": 40,
+    "analytes": {
+      "consistency": {
+        "contributionPercentage": 100,
+        "baseline": 3,
+        "warningLowerBound": 1,
+        "normalLowerBound": 3,
+        "normalUpperBound": 4,
+        "warningUpperBound": 6,
+        "minimumLowerBound": 0,
+        "maximumUpperBound": 7
+      },
+      "color": {
+        "contributionPercentage": 0,
+        "baseline": 3,
+        "warningLowerBound": 1.5,
+        "normalLowerBound": 2.5,
+        "normalUpperBound": 3.5,
+        "warningUpperBound": 4.5,
+        "minimumLowerBound": 0,
+        "maximumUpperBound": 7
+      },
+      "frequency": {
+        "contributionPercentage": 0,
+        "baseline": 2,
+        "warningLowerBound": 0.01,
+        "normalLowerBound": 0.02,
+        "maximumUpperBound": 0,
+        "normalUpperBound": 3.5,
+        "warningUpperBound": 5.5,
+        "minimumLowerBound": 0
+      },
+      "durationInSeconds": {
+        "contributionPercentage": 0,
+        "baseline": 600,
+        "warningLowerBound": 0.01,
+        "normalLowerBound": 1,
+        "maximumUpperBound": 0,
+        "normalUpperBound": 900,
+        "warningUpperBound": 1500,
+        "minimumLowerBound": 0
+      }
+    }
+  },
+  "minScoresForAvg": 0,
+  "avgScoreWindowSize": 30
+}

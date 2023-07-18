@@ -1,0 +1,8 @@
+{
+  "parameters": {
+    "skip": 0,
+    "take": 100,
+    "read": false,
+    "deleted": false
+  }
+}

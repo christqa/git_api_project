@@ -1,0 +1,16 @@
+{
+  "path": "/mark+0405a@projectspectra.dev/",
+  "parameters": {
+    "deleteData": false
+  },
+
+  "body": {
+    "type": "hydration",
+    "scores": [
+      {
+        "date": 0,
+        "value": 0
+      }
+    ]
+  }
+}

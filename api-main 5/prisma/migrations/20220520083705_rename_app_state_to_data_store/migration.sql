@@ -1,0 +1,1 @@
+ALTER TABLE "AppState" RENAME TO "DataStore";

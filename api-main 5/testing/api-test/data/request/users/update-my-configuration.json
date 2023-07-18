@@ -1,0 +1,105 @@
+{
+  "path": "/mark+0405a@projectspectra.dev/configuration",
+  "body": {
+    "hydration": {
+      "analytes": {
+        "durationInSeconds": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        },
+        "frequency": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        },
+        "color": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        },
+        "concentration": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        }
+      },
+      "warningUpperBound": 0,
+      "needsImprovementUpperBound": 0,
+      "optimumRangeLow": 0,
+      "trendIndicator": "good",
+      "baseline": 0
+    },
+    "gutHealth": {
+      "analytes": {
+        "durationInSeconds": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        },
+        "frequency": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        },
+        "color": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        },
+        "consistency": {
+          "contributionPercentage": 0,
+          "baseline": 0,
+          "warningLowerBound": 0,
+          "normalLowerBound": 0,
+          "normalUpperBound": 0,
+          "warningUpperBound": 0,
+          "minimumLowerBound": 0,
+          "maximumUpperBound": 0
+        }
+      },
+      "warningUpperBound": 0,
+      "needsImprovementUpperBound": 0,
+      "optimumRangeLow": 0,
+      "trendIndicator": "good",
+      "baseline": 0
+    },
+    "minScoresForAvg": 0,
+    "avgScoreWindowSize": 0
+  }
+}

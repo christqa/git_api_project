@@ -1,0 +1,89 @@
+{
+  "type": "gutHealth",
+  "scores": [
+    {
+      "date": 0,
+      "value": 65
+    },
+    {
+      "date": -1,
+      "value": 68
+    },
+    {
+      "date": -2,
+      "value": 77
+    },
+    {
+      "date": -3,
+      "value": 95
+    },
+    {
+      "date": -4,
+      "value": 73
+    },
+    {
+      "date": -5,
+      "value": 74
+    },
+    {
+      "date": -6,
+      "value": 66
+    },
+    {
+      "date": -7,
+      "value": 76
+    },
+    {
+      "date": -8,
+      "value": 83
+    },
+    {
+      "date": -9,
+      "value": 84
+    },
+    {
+      "date": -10,
+      "value": 81
+    },
+    {
+      "date": -11,
+      "value": 82
+    },
+    {
+      "date": -12,
+      "value": 78
+    },
+    {
+      "date": -13,
+      "value": 79
+    },
+    {
+      "date": -14,
+      "value": 92
+    },
+    {
+      "date": -15,
+      "value": 56
+    },
+    {
+      "date": -16,
+      "value": 95
+    },
+    {
+      "date": -17,
+      "value": 69
+    },
+    {
+      "date": -18,
+      "value": 83
+    },
+    {
+      "date": -19,
+      "value": 89
+    },
+    {
+      "date": -20,
+      "value": 94
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+This file provides details about the validation-testing structure. 
+
+Test suites for each validator are contained in their corresponding JSON object array.
+Each JSON object represents a test case.
+
+The format of each test case is as follows:
+
+    TestCase 
+        testName: The name of the test case
+        isPositiveTestCase: A flag that indicates whether the validator should pass or fail
+        responseKeywords: The expected reponse from the validator [Optional]
+        testCase: The contents of the test case. The object you want to be validated.
+
+
+ The example below is a test case for the getUserConfiguration validator:   
+    {
+        "testName": "Valid test case #2",
+        "isPositiveTestCase": true,
+        "testCase": {
+            "query": {
+                "email": "john@gmail.com"
+            }
+        }
+    }
+
+The name of the test case is "Valid test case #2". The validator is also expected to pass as the
+the isPositiveTestCase flag is set to true. Finally, the test case content is within the testCase
+property.
+
+
+Below is another test case example for the getUserConfiguration validator:  
+    {
+        "testName": "Invalid email",
+        "isPositiveTestCase": false,
+        "responseKeywords": ["\"email\" must be a valid email"],
+        "testCase": {
+            "query": {
+                "email": "john#2@@gmail.com"
+            }
+        }
+    }
+
+The name of the test case is "Invalid email". The validator is expected to fail because the 
+isPositiveTestCase is set to false. In addition, the expected error message is detailing in
+the responseKeywords property: "email" must be a valid email. Finally, the content of the test case
+is detailed withing the testCase property

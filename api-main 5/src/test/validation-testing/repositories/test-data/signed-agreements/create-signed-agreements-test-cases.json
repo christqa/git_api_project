@@ -1,0 +1,65 @@
+[
+  {
+    "testName": "Valid test case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "privacyPolicyVersion": 1,
+        "termsAndConditionsVersion": 1,
+        "shareUsageAgreed": false
+      }
+    }
+  },
+
+  {
+    "testName": "Valid test case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "privacyPolicyVersion": 1,
+        "termsAndConditionsVersion": 100,
+        "shareUsageAgreed": false
+      }
+    }
+  },
+
+  {
+    "testName": "Valid test case #3",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "privacyPolicyVersion": 2,
+        "termsAndConditionsVersion": 100,
+        "shareUsageAgreed": true
+      }
+    }
+  },
+
+  {
+    "testName": "privacyPolicyVersion is lower than mininum limit",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"privacyPolicyVersion\" must be greater than or equal to 1"
+    ],
+    "testCase": {
+      "body": {
+        "privacyPolicyVersion": 0,
+        "termsAndConditionsVersion": 100,
+        "shareUsageAgreed": true
+      }
+    }
+  },
+
+  {
+    "testName": "shareUsageAgreed is not a boolean",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"shareUsageAgreed\" must be a boolean"],
+    "testCase": {
+      "body": {
+        "privacyPolicyVersion": 1,
+        "termsAndConditionsVersion": 100,
+        "shareUsageAgreed": []
+      }
+    }
+  }
+]

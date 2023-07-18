@@ -1,0 +1,93 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "params": {
+        "email": "test@tester.com"
+      },
+
+      "query": {
+        "deleteData": true
+      },
+
+      "body": [
+        {
+          "data": [
+            {
+              "startDate": "2022-06-10T08:00:00Z",
+              "endDate": "2022-06-10T08:00:00Z",
+              "color": 1,
+              "consistency": 1,
+              "hasBlood": true,
+              "durationInSeconds": 100
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "params": {
+        "email": "test@tester.com"
+      },
+
+      "query": {
+        "deleteData": false
+      },
+
+      "body": [
+        {
+          "data": [
+            {
+              "startDate": "2022-06-10T08:00:00Z",
+              "endDate": "2022-06-10T08:00:00Z",
+              "color": 7,
+              "consistency": 1,
+              "hasBlood": true,
+              "durationInSeconds": 100
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  {
+    "testName": "Invalid Test case",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"[0].data[0].color\" must be less than or equal to 7",
+      "\"email\" must be a valid email",
+      "\"deleteData\" must be a boolean"
+    ],
+    "testCase": {
+      "params": {
+        "email": "test@@tester.com"
+      },
+
+      "query": {
+        "deleteData": []
+      },
+
+      "body": [
+        {
+          "data": [
+            {
+              "startDate": "2022-06-10T08:00:00Z",
+              "endDate": "2022-06-10T08:00:00Z",
+              "color": 8,
+              "consistency": 1,
+              "hasBlood": true,
+              "durationInSeconds": 100
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

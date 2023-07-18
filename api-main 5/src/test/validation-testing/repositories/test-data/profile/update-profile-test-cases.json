@@ -1,0 +1,62 @@
+[
+  {
+    "testName": "Valid test case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "dob": "09/02/2003",
+        "regionalPref": "en-US",
+        "genderId": 1,
+        "weightLbs": 5,
+        "heightIn": 1,
+        "lifeStyleId": 1,
+        "exerciseIntensityId": 1,
+        "medicalConditionIds": [1, 3, 4],
+        "medicationIds": [1, 2, 3],
+        "urinationsPerDayId": 1,
+        "bowelMovementId": 1
+      }
+    }
+  },
+
+  {
+    "testName": "Valid test case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "dob": "09/02/2003",
+        "regionalPref": "en-US",
+        "genderId": 10,
+        "weightLbs": 1500,
+        "heightIn": 131,
+        "lifeStyleId": 5,
+        "exerciseIntensityId": 3,
+        "medicalConditionIds": [1, 3, 4],
+        "medicationIds": [1, 2, 3],
+        "urinationsPerDayId": 1,
+        "bowelMovementId": 1
+      }
+    }
+  },
+
+  {
+    "testName": "weightLbs is larger than the max limit",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"weightLbs\" must be less than or equal to 1500"],
+    "testCase": {
+      "body": {
+        "dob": "09/02/2003",
+        "regionalPref": "en-US",
+        "genderId": 10,
+        "weightLbs": 1501,
+        "heightIn": 131,
+        "lifeStyleId": 5,
+        "exerciseIntensityId": 3,
+        "medicalConditionIds": [1, 3, 4],
+        "medicationIds": [1, 2, 3],
+        "urinationsPerDayId": 1,
+        "bowelMovementId": 1
+      }
+    }
+  }
+]

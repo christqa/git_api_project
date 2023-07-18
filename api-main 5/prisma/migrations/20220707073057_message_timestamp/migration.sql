@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Message" ALTER COLUMN "deleted" SET DATA TYPE TIMESTAMPTZ(3);

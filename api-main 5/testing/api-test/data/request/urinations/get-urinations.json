@@ -1,0 +1,8 @@
+{
+  "parameters": {
+    "groupBy": "day",
+    "type": "frequency",
+    "endDate": "10/14/2022",
+    "startDate": "10/14/2022"
+  }
+}

@@ -1,0 +1,123 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "params": {
+        "email": "test@tester.com"
+      },
+
+      "query": {
+        "deleteData": true
+      },
+
+      "body": {
+        "type": "hydration",
+        "scores": [
+          {
+            "date": 0,
+            "value": 0
+          },
+          {
+            "date": 0,
+            "value": 100
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "params": {
+        "email": "test@tester.com"
+      },
+
+      "query": {
+        "deleteData": false
+      },
+
+      "body": {
+        "type": "gutHealth",
+        "scores": [
+          {
+            "date": -100,
+            "value": 100
+          },
+          {
+            "date": 0,
+            "value": 20
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid test case #1",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"email\" must be a valid email",
+      "\"deleteData\" must be a boolean",
+      "\"scores[1].value\" must be less than or equal to 100"
+    ],
+    "testCase": {
+      "params": {
+        "email": "test@@tester.com"
+      },
+
+      "query": {
+        "deleteData": "asd"
+      },
+
+      "body": {
+        "type": "gutHealth",
+        "scores": [
+          {
+            "date": -100,
+            "value": 100
+          },
+          {
+            "date": 0,
+            "value": 101
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid test case #2",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"email\" must be a string",
+      "\"deleteData\" must be a boolean",
+      "\"scores[1].date\" must be less than or equal to 0"
+    ],
+    "testCase": {
+      "params": {
+        "email": false
+      },
+
+      "query": {
+        "deleteData": []
+      },
+
+      "body": {
+        "type": "gutHealth",
+        "scores": [
+          {
+            "date": -100,
+            "value": 100
+          },
+          {
+            "date": 1,
+            "value": 100
+          }
+        ]
+      }
+    }
+  }
+]

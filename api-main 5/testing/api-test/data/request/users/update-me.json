@@ -1,0 +1,18 @@
+{
+  "body": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "profile": {
+      "bowelMovementId": 4,
+      "urinationsPerDayId": 3,
+      "medicationIds": [3, 5],
+      "medicalConditionIds": [1, 3],
+      "exerciseIntensityId": 3,
+      "lifeStyleId": 1,
+      "genderId": 1,
+      "heightIn": 72,
+      "weightLbs": 100,
+      "dob": "06/01/2003"
+    }
+  }
+}

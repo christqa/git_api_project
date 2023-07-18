@@ -1,0 +1,17 @@
+export * as userService from '@modules/user/user.service';
+export * as statusService from '@modules/status/status.service';
+export * as referenceDataService from '@modules/reference-data/reference-data.service';
+export * as profileService from '@modules/profile/profile.service';
+export * as signedAgreementsService from '@modules/signed-agreements/signed-agreements.service';
+export * as notificationSettingsService from '@modules/notification-settings/notification-settings.service';
+export * as notificationsService from '@modules/notifications/notifications.service';
+export * as inviteService from '@modules/invite/invite.service';
+export * as dataSharingAgreementService from '@modules/data-sharing-agreement/data-sharing-agreement.service';
+export * as deviceInventoryService from '@modules/device-inventory/device-inventory.service';
+export * as deviceActivationService from '@modules/device-activation/device-activation.service';
+export * as deviceEventsService from '@modules/device-events/device-events.service';
+export * as groupsService from '@modules/groups/groups.service';
+export * as ctAdminService from '@modules/ct-admin/ct-admin.service';
+export * as dataPrivacyRemovalRequestService from '@modules/data-privacy-removal-requests/data-privacy-removal-requests.service';
+export * as globalSettingsService from '@modules/global-settings/global-settings.service';
+export * as deviceSettingsService from '@modules/device-settings/device-settings.service';

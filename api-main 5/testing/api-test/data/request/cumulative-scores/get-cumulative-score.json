@@ -1,0 +1,8 @@
+{
+  "parameters": {
+    "groupBy": "day",
+    "type": "hydration",
+    "endDate": "06/12/2022",
+    "startDate": "06/08/2022"
+  }
+}

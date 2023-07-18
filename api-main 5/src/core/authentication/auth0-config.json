@@ -1,0 +1,7 @@
+{
+  "cache": true,
+  "rateLimit": true,
+  "jwksRequestsPerMinute": 5,
+  "algorithms": ["RS256"],
+  "jwks": "/.well-known/jwks.json"
+}

@@ -1,0 +1,84 @@
+name: pr-check
+
+# Controls when the workflow will run
+on:
+  pull_request:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest-4core
+    env:
+      NODE_OPTIONS: --max-old-space-size=10240
+    timeout-minutes: 30
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      # Get the instance IP
+      - name: Get Github action IP
+        id: ip
+        run: echo "ipv4=`curl ipv4.icanhazip.com`" >> $GITHUB_OUTPUT
+
+      # Configure AWS Env Variables
+      - name: Set environement variables
+        run: |
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+          echo "AWS_SG_ID=sg-0db7cb1e3ed246bd6" >> $GITHUB_ENV
+
+      # Add the instance IP to the AWS Security Group
+      - name: Add Github Actions IP to Security group
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ env.AWS_SG_ID }} --protocol tcp --port 443 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
+
+      # Install Yarn dependencies
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # Run prettier check
+      - name: Check code formatting
+        run: yarn format:check
+
+      # Run linter check
+      - name: Check linter
+        run: yarn lint:check
+
+      # Generate eslint report for sonarqube
+      - name: generate eslint report for sonarqube
+        run: yarn lint:generate-report
+
+      # Run unit tests
+      - name: Run unit tests
+        run: yarn test
+
+      # Run api test cases
+      - name: Run API test cases
+        run: yarn api-test
+
+      # Running Code Analysis
+      - name: Sonarqube code Analysis
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # Remove instance IP from AWS Whitelist (use if always clause to ensure it runs even if tests fail)
+      - name: Remove Github Actions IP from security group
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ env.AWS_SG_ID }} --protocol tcp --port 443 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
+        if: always()

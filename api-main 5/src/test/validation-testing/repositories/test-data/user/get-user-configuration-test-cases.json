@@ -1,0 +1,32 @@
+[
+  {
+    "testName": "Valid test case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "profileId": 1
+      }
+    }
+  },
+
+  {
+    "testName": "Valid test case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "profileId": 1
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid email",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"email\" must be a valid email"],
+    "testCase": {
+      "query": {
+        "email": "john#2@@gmail.com"
+      }
+    }
+  }
+]

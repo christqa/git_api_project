@@ -1,0 +1,9 @@
+{
+  "parameters": {
+    "startDate": "04/13/2022",
+    "endDate": "04/20/2022",
+    "personalData": true,
+    "annotations": false,
+    "conditionsAndMedications": true
+  }
+}

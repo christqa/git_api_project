@@ -1,0 +1,78 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "day",
+        "type": "color"
+      }
+    }
+  },
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "year",
+        "type": "durationInSeconds"
+      }
+    }
+  },
+  {
+    "testName": "Valid Test Case #3",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "month",
+        "type": "concentration"
+      }
+    }
+  },
+  {
+    "testName": "Valid Test Case #4",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "week",
+        "type": "frequency"
+      }
+    }
+  },
+  {
+    "testName": "Invalid start date format",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"startDate\" must be in YYYY-MM-DDTHH:mm:ssZ format, \"endDate\" does not match any of the allowed types"
+    ],
+    "testCase": {
+      "query": {
+        "startDate": "01/20/20222",
+        "endDate": "2022-10-10T09:30:00:00Z",
+        "groupBy": "week",
+        "type": "frequency"
+      }
+    }
+  },
+  {
+    "testName": "Invalid groupBy type",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"groupBy\" must be one of [week, month, day, year]"],
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "weekx",
+        "type": "frequency"
+      }
+    }
+  }
+]

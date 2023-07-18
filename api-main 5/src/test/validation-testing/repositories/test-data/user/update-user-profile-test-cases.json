@@ -1,0 +1,157 @@
+[
+  {
+    "testName": "Valid test case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "firstName": "test",
+        "lastName": "tester",
+        "profile": {
+          "dob": "04/05/2003",
+          "regionalPref": "en-US",
+          "genderId": 1,
+          "weightLbs": 5,
+          "heightIn": 1,
+          "lifeStyleId": 1,
+          "exerciseIntensityId": 1,
+          "medicalConditionIds": [1, 3, 5],
+          "medicationIds": [1, 2, 4],
+          "urinationsPerDayId": 1,
+          "bowelMovementId": 1
+        }
+      }
+    }
+  },
+
+  {
+    "testName": "Valid test case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "firstName": "john",
+        "lastName": "doe",
+        "profile": {
+          "dob": "09/15/2002",
+          "regionalPref": "en-US",
+          "genderId": 2,
+          "weightLbs": 1500,
+          "heightIn": 131,
+          "lifeStyleId": 2,
+          "exerciseIntensityId": 2,
+          "medicalConditionIds": [1, 2, 3],
+          "medicationIds": [1, 2, 4],
+          "urinationsPerDayId": 2,
+          "bowelMovementId": 2
+        }
+      }
+    }
+  },
+
+  {
+    "testName": "WeightLbs is larger than the max limit",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"profile.weightLbs\" must be less than or equal to 1500"
+    ],
+    "testCase": {
+      "body": {
+        "firstName": "john",
+        "lastName": "doe",
+        "profile": {
+          "dob": "09/15/2002",
+          "regionalPref": "en-US",
+          "genderId": 2,
+          "weightLbs": 1501,
+          "heightIn": 131,
+          "lifeStyleId": 2,
+          "exerciseIntensityId": 2,
+          "medicalConditionIds": [1, 2, 3],
+          "medicationIds": [1, 2, 4],
+          "urinationsPerDayId": 2,
+          "bowelMovementId": 2
+        }
+      }
+    }
+  },
+
+  {
+    "testName": "WeightLbs is smaller than the min limit",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"profile.weightLbs\" must be greater than or equal to 5"
+    ],
+    "testCase": {
+      "body": {
+        "firstName": "john",
+        "lastName": "doe",
+        "profile": {
+          "dob": "09/15/2002",
+          "regionalPref": "en-US",
+          "genderId": 2,
+          "weightLbs": 4,
+          "heightIn": 131,
+          "lifeStyleId": 2,
+          "exerciseIntensityId": 2,
+          "medicalConditionIds": [1, 2, 3],
+          "medicationIds": [1, 2, 4],
+          "urinationsPerDayId": 2,
+          "bowelMovementId": 2
+        }
+      }
+    }
+  },
+
+  {
+    "testName": "Medical condition ids has repetive ids",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"profile.medicalConditionIds[1]\" contains a duplicate value"
+    ],
+    "testCase": {
+      "body": {
+        "firstName": "john",
+        "lastName": "doe",
+        "profile": {
+          "dob": "09/15/2002",
+          "regionalPref": "en-US",
+          "genderId": 2,
+          "weightLbs": 5,
+          "heightIn": 131,
+          "lifeStyleId": 2,
+          "exerciseIntensityId": 2,
+          "medicalConditionIds": [1, 1, 3],
+          "medicationIds": [1, 2, 4],
+          "urinationsPerDayId": 2,
+          "bowelMovementId": 2
+        }
+      }
+    }
+  },
+
+  {
+    "testName": "Bowel movement id is smaller than the minimum limit",
+    "isPositiveTestCase": false,
+    "responseKeywords": [
+      "\"profile.bowelMovementId\" must be greater than or equal to 1"
+    ],
+    "testCase": {
+      "body": {
+        "firstName": "john",
+        "lastName": "doe",
+        "profile": {
+          "dob": "09/15/2002",
+          "regionalPref": "en-US",
+          "genderId": 2,
+          "weightLbs": 5,
+          "heightIn": 131,
+          "lifeStyleId": 2,
+          "exerciseIntensityId": 2,
+          "medicalConditionIds": [1, 2, 3],
+          "medicationIds": [1, 2, 4],
+          "urinationsPerDayId": 2,
+          "bowelMovementId": 0
+        }
+      }
+    }
+  }
+]

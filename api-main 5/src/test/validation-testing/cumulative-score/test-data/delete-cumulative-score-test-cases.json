@@ -1,0 +1,51 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "userEmail": "test@projectspectra.dev",
+        "type": "hydration",
+        "date": 0
+      }
+    }
+  },
+
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "body": {
+        "userEmail": "john@projectspectra.dev",
+        "type": "gutHealth",
+        "date": -1
+      }
+    }
+  },
+
+  {
+    "testName": "Date is greater than 0",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"date\" must be less than or equal to 0"],
+    "testCase": {
+      "body": {
+        "userEmail": "john@projectspectra.dev",
+        "type": "gutHealth",
+        "date": 1
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid email",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"userEmail\" must be a valid email"],
+    "testCase": {
+      "body": {
+        "userEmail": "john@@projectspectra.dev",
+        "type": "gutHealth",
+        "date": 1
+      }
+    }
+  }
+]

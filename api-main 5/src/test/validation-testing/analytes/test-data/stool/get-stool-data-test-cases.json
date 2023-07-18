@@ -1,0 +1,41 @@
+[
+  {
+    "testName": "Valid Test Case #1",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "week",
+        "type": "color"
+      }
+    }
+  },
+
+  {
+    "testName": "Valid Test Case #2",
+    "isPositiveTestCase": true,
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "week",
+        "type": "color"
+      }
+    }
+  },
+
+  {
+    "testName": "Invalid groupBy",
+    "isPositiveTestCase": false,
+    "responseKeywords": ["\"groupBy\" must be one of [week, month, day, year]"],
+    "testCase": {
+      "query": {
+        "startDate": -1,
+        "endDate": 0,
+        "groupBy": "weekx",
+        "type": "color"
+      }
+    }
+  }
+]

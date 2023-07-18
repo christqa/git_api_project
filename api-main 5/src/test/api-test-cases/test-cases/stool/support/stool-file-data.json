@@ -1,0 +1,350 @@
+[
+  {
+    "data": [
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 6,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 272
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 3,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 1007
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 3,
+        "color": 4,
+        "hasBlood": false,
+        "durationInSeconds": 139
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 5,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 362
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 4,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 1162
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 4,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 228
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 3,
+        "color": 4,
+        "hasBlood": false,
+        "durationInSeconds": 1428
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 4,
+        "color": 4,
+        "hasBlood": false,
+        "durationInSeconds": 630
+      },
+      {
+        "startDate": "2022-08-02T01:48:22Z",
+        "endDate": "2022-08-02T01:48:22Z",
+        "consistency": 6,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 424
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "startDate": "2022-08-01T03:49:22Z",
+        "endDate": "2022-08-01T03:49:22Z",
+        "consistency": 7,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 1088
+      },
+      {
+        "startDate": "2022-08-01T03:49:22Z",
+        "endDate": "2022-08-01T03:49:22Z",
+        "consistency": 4,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 781
+      },
+      {
+        "startDate": "2022-08-01T03:49:22Z",
+        "endDate": "2022-08-01T03:49:22Z",
+        "consistency": 5,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 1434
+      },
+      {
+        "startDate": "2022-08-01T03:49:22Z",
+        "endDate": "2022-08-01T03:49:22Z",
+        "consistency": 6,
+        "color": 4,
+        "hasBlood": false,
+        "durationInSeconds": 983
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "startDate": "2022-07-31T02:06:22Z",
+        "endDate": "2022-07-31T02:06:22Z",
+        "consistency": 5,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 394
+      },
+      {
+        "startDate": "2022-07-31T02:06:22Z",
+        "endDate": "2022-07-31T02:06:22Z",
+        "consistency": 3,
+        "color": 4,
+        "hasBlood": false,
+        "durationInSeconds": 282
+      },
+      {
+        "startDate": "2022-07-31T02:06:22Z",
+        "endDate": "2022-07-31T02:06:22Z",
+        "consistency": 5,
+        "color": 7,
+        "hasBlood": false,
+        "durationInSeconds": 1241
+      },
+      {
+        "startDate": "2022-07-31T02:06:22Z",
+        "endDate": "2022-07-31T02:06:22Z",
+        "consistency": 5,
+        "color": 5,
+        "hasBlood": false,
+        "durationInSeconds": 1242
+      },
+      {
+        "startDate": "2022-07-31T02:06:22Z",
+        "endDate": "2022-07-31T02:06:22Z",
+        "consistency": 5,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 803
+      },
+      {
+        "startDate": "2022-07-31T02:06:22Z",
+        "endDate": "2022-07-31T02:06:22Z",
+        "consistency": 6,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 1169
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "startDate": "2022-07-30T03:51:22Z",
+        "endDate": "2022-07-30T03:51:22Z",
+        "consistency": 6,
+        "color": 7,
+        "hasBlood": false,
+        "durationInSeconds": 967
+      },
+      {
+        "startDate": "2022-07-30T03:51:22Z",
+        "endDate": "2022-07-30T03:51:22Z",
+        "consistency": 7,
+        "color": 7,
+        "hasBlood": false,
+        "durationInSeconds": 602
+      },
+      {
+        "startDate": "2022-07-30T03:51:22Z",
+        "endDate": "2022-07-30T03:51:22Z",
+        "consistency": 5,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 649
+      },
+      {
+        "startDate": "2022-07-30T03:51:22Z",
+        "endDate": "2022-07-30T03:51:22Z",
+        "consistency": 6,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 423
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "startDate": "2022-07-29T07:07:22Z",
+        "endDate": "2022-07-29T07:07:22Z",
+        "consistency": 5,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 617
+      },
+      {
+        "startDate": "2022-07-29T07:07:22Z",
+        "endDate": "2022-07-29T07:07:22Z",
+        "consistency": 7,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 699
+      },
+      {
+        "startDate": "2022-07-29T07:07:22Z",
+        "endDate": "2022-07-29T07:07:22Z",
+        "consistency": 6,
+        "color": 4,
+        "hasBlood": false,
+        "durationInSeconds": 454
+      },
+      {
+        "startDate": "2022-07-29T07:07:22Z",
+        "endDate": "2022-07-29T07:07:22Z",
+        "consistency": 4,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 866
+      },
+      {
+        "startDate": "2022-07-29T07:07:22Z",
+        "endDate": "2022-07-29T07:07:22Z",
+        "consistency": 3,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 1292
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "startDate": "2022-07-28T11:15:22Z",
+        "endDate": "2022-07-28T11:15:22Z",
+        "consistency": 6,
+        "color": 5,
+        "hasBlood": false,
+        "durationInSeconds": 1254
+      },
+      {
+        "startDate": "2022-07-28T11:15:22Z",
+        "endDate": "2022-07-28T11:15:22Z",
+        "consistency": 5,
+        "color": 5,
+        "hasBlood": false,
+        "durationInSeconds": 383
+      },
+      {
+        "startDate": "2022-07-28T11:15:22Z",
+        "endDate": "2022-07-28T11:15:22Z",
+        "consistency": 3,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 198
+      },
+      {
+        "startDate": "2022-07-28T11:15:22Z",
+        "endDate": "2022-07-28T11:15:22Z",
+        "consistency": 3,
+        "color": 5,
+        "hasBlood": false,
+        "durationInSeconds": 706
+      },
+      {
+        "startDate": "2022-07-28T11:15:22Z",
+        "endDate": "2022-07-28T11:15:22Z",
+        "consistency": 5,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 1120
+      },
+      {
+        "startDate": "2022-07-28T11:15:22Z",
+        "endDate": "2022-07-28T11:15:22Z",
+        "consistency": 4,
+        "color": 5,
+        "hasBlood": false,
+        "durationInSeconds": 627
+      }
+    ]
+  },
+  {
+    "data": [
+      {
+        "startDate": "2022-07-27T09:52:22Z",
+        "endDate": "2022-07-27T09:52:22Z",
+        "consistency": 7,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 535
+      },
+      {
+        "startDate": "2022-07-27T09:52:22Z",
+        "endDate": "2022-07-27T09:52:22Z",
+        "consistency": 6,
+        "color": 6,
+        "hasBlood": false,
+        "durationInSeconds": 929
+      },
+      {
+        "startDate": "2022-07-27T09:52:22Z",
+        "endDate": "2022-07-27T09:52:22Z",
+        "consistency": 3,
+        "color": 4,
+        "hasBlood": false,
+        "durationInSeconds": 697
+      },
+      {
+        "startDate": "2022-07-27T09:52:22Z",
+        "endDate": "2022-07-27T09:52:22Z",
+        "consistency": 6,
+        "color": 7,
+        "hasBlood": false,
+        "durationInSeconds": 954
+      },
+      {
+        "startDate": "2022-07-27T09:52:22Z",
+        "endDate": "2022-07-27T09:52:22Z",
+        "consistency": 4,
+        "color": 3,
+        "hasBlood": false,
+        "durationInSeconds": 161
+      },
+      {
+        "startDate": "2022-07-27T09:52:22Z",
+        "endDate": "2022-07-27T09:52:22Z",
+        "consistency": 5,
+        "color": 5,
+        "hasBlood": false,
+        "durationInSeconds": 743
+      }
+    ]
+  }
+]

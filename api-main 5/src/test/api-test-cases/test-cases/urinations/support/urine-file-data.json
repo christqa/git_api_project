@@ -1,0 +1,55 @@
+[
+  {
+    "data": [
+      {
+        "startDate": "2022-08-02T02:45:57Z",
+        "endDate": "2022-08-02T02:45:57Z",
+        "color": 2,
+        "concentration": 1.047,
+        "durationInSeconds": 1520
+      },
+      {
+        "startDate": "2022-08-02T02:45:57Z",
+        "endDate": "2022-08-02T02:45:57Z",
+        "color": 4,
+        "concentration": 1.04,
+        "durationInSeconds": 2912
+      },
+      {
+        "startDate": "2022-08-02T02:45:57Z",
+        "endDate": "2022-08-02T02:45:57Z",
+        "color": 9,
+        "concentration": 1.001,
+        "durationInSeconds": 1726
+      },
+      {
+        "startDate": "2022-08-02T02:45:57Z",
+        "endDate": "2022-08-02T02:45:57Z",
+        "color": 5,
+        "concentration": 1.003,
+        "durationInSeconds": 1379
+      },
+      {
+        "startDate": "2022-08-02T02:45:57Z",
+        "endDate": "2022-08-02T02:45:57Z",
+        "color": 8,
+        "concentration": 1.015,
+        "durationInSeconds": 2904
+      },
+      {
+        "startDate": "2022-08-02T02:45:57Z",
+        "endDate": "2022-08-02T02:45:57Z",
+        "color": 3,
+        "concentration": 1.02,
+        "durationInSeconds": 753
+      },
+      {
+        "startDate": "2022-08-02T02:45:57Z",
+        "endDate": "2022-08-02T02:45:57Z",
+        "color": 8,
+        "concentration": 1.022,
+        "durationInSeconds": 2349
+      }
+    ]
+  }
+]
